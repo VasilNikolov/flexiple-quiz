@@ -1,0 +1,23 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "react/prop-types": 2,
+    "indent": "off",
+    "jsx-quotes": "off",
+    "max-len": "off",
+    "quote-props": "off",
+    "react/jsx-indent": "off",
+    "react/jsx-indent-props": "off",
+    "prettier/prettier": "error",
+    "no-alert": "error",
+    "no-console": "error",
+    "linebreak-style": 0,
+    "lines-between-class-members": ["error", "always"],
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "*", "next": "return" }
+    ],
+    "react/no-unused-prop-types": "error",
+    "import/no-extraneous-dependencies": "error"
+  }
+}
