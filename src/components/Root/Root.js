@@ -10,13 +10,7 @@ export default class Root extends React.Component {
 	};
 
 	welcomeComplete = data => {
-
-
 		this.setState({ showWelcomeScreen: false, details: data, showQuiz: true })
-	}
-
-	quizComplete = data => {
-		console.log(data)
 	}
 
 	render() {
@@ -24,7 +18,7 @@ export default class Root extends React.Component {
 		return (
 			<div>
 				{ this.state.showWelcomeScreen ? <WelcomeScreen completeHandler={this.welcomeComplete}/> : ''}
-				{ this.state.showQuiz ? <Quiz completeHandler={this.quizComplete} category={this.state.details.category}/> : ''}
+				{ this.state.showQuiz ? <Quiz category={this.state.details.category} name={this.state.details.name}/> : ''}
 			</div>
 		)
 	}

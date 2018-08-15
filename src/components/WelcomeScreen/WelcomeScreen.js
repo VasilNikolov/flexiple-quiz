@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, FormGroup, TextField, Select, MenuItem, Button, InputLabel, FormControl } from '@material-ui/core'
+import { Grid, FormGroup, TextField, Button, Typography } from '@material-ui/core'
 import axios from "axios";
 import Loader from 'react-loader-spinner'
 import PropTypes from 'prop-types'
@@ -18,12 +18,14 @@ export default class WelcomeScreen extends Component {
 		name: '',
 		email: '',
 		phone: '',
-	};
+	}
 
 	componentDidMount() {
 		let categories = axios.get('https://opentdb.com/api_category.php');
 		categories.then(response => {
 			this.setState({ categories: response.data.trivia_categories, loading: false, category: response.data.trivia_categories[0].id })
+		}).catch(err => {
+			alert(err)
 		})
 	}
 
@@ -42,30 +44,40 @@ export default class WelcomeScreen extends Component {
 
   render() {
 
-	  let content = [];
+	  let content = [],
+	      disabled = true
+
+	  if (this.state.name) {
+	  	disabled = false
+	  }
 
 	  if (this.state.loading) {
-	  	content = ( <Loader
-			  type="Puff"
-			  color="#00BFFF"
-			  height="100"
-			  width="100"
-		  />)
+	  	content = (
+	  		<div className={'loader'}>
+				  <Loader
+					  type="Ball-Triangle"
+					  color="#436e8e"
+					  height="100"
+					  width="100"
+				  />
+			  </div>
+	  		)
 	  } else {
 	  	content = (
-			  <div>
+			  <div className='p-20'>
 				  <h2>Welcome!</h2>
-				  <div style={{padding: '20px'}}>
+				  <Typography>You have 60 seconds to answer as many questions as you can!</Typography>
+				  <div>
 					  <Grid
 						  container
 						  justify="center"
 						  alignItems="center"
 						  spacing={40}
 					  >
-						  <Grid item xs={3}>
+						  <Grid item xs={12} sm={6} lg={3} xl={2}>
 							  <form onSubmit={this.submitHandler}>
 								  <FormGroup>
-									  <TextField label={'Name:'} name={'name'} value={this.state.name} onChange={this.detailsChangeHandler}/>
+									  <TextField required label={'Name:'} name={'name'} value={this.state.name} onChange={this.detailsChangeHandler}/>
 								  </FormGroup>
 								  <FormGroup>
 									  <TextField label={'Email:'} name={'email'} value={this.state.email} onChange={this.detailsChangeHandler}/>
@@ -73,10 +85,10 @@ export default class WelcomeScreen extends Component {
 								  <FormGroup>
 									  <TextField label={'Phone number:'} name={'phone'} value={this.state.phone} onChange={this.detailsChangeHandler}/>
 								  </FormGroup>
-								  <FormGroup>
+								  <FormGroup className='mt-20'>
 										<CategorySelect categories={this.state.categories} handler={this.changeCategory} value={this.state.category} />
 								  </FormGroup>
-								  <Button type={'submit'}>Submit</Button>
+								  <Button type={'submit'} disabled={disabled} className='mt-20'>Submit</Button>
 							  </form>
 						  </Grid>
 					  </Grid>

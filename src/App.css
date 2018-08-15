@@ -1,3 +1,26 @@
 .App {
   text-align: center;
 }
+
+h1,h2 {
+  color: #436e8e;
+}
+
+h3,h4 {
+  color: #444d54;
+}
+
+body .mt-20 {
+  margin-top: 20px;
+}
+
+.p-20 {
+  padding: 20px;
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
