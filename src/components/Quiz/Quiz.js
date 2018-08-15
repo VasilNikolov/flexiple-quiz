@@ -40,7 +40,7 @@ export default class Quiz extends Component {
 			condition: 'complete',
 		}
 
-		if (newState.counter === 19) {
+		if (newState.counter === 20) {
 			this.setState(newState)
 			this.completeQuiz('complete')
 		} else {
@@ -80,7 +80,7 @@ export default class Quiz extends Component {
 					<div>
 						<h2>Quiz</h2>
 						<QuizTimer completeHandler={this.completeQuiz} />
-						<QuizCard {...this.state.questions[this.state.counter]} nextHandler={this.nextQuiestion} />
+						<QuizCard {...this.state.questions[this.state.counter]} questionNumber={this.state.counter} nextHandler={this.nextQuiestion} />
 					</div>
 				)
 			}

@@ -20,6 +20,7 @@ export default class QuizCard extends PureComponent {
 		incorrect_answers: PropTypes.array,
 		type: PropTypes.string,
 		nextHandler: PropTypes.func.isRequired,
+		questionNumber: PropTypes.number
 	}
 
 	state = {
@@ -55,7 +56,7 @@ export default class QuizCard extends PureComponent {
 	}
 
 	render() {
-		let { correct_answer, incorrect_answers, question, type } = this.props
+		let { correct_answer, incorrect_answers, question, type, questionNumber } = this.props
 
 		let incorrect,
 				radioValue,
@@ -87,7 +88,7 @@ export default class QuizCard extends PureComponent {
 								<form onSubmit={this.submitHandler}>
 									<FormGroup>
 										<FormControl component="fieldset">
-											<h3>{this.decodeHtml(question)}</h3>
+											<h3>{this.decodeHtml(`${questionNumber + 1}. ${question}`)}</h3>
 											<RadioGroup
 												name="gender1"
 												value={radioValue}
